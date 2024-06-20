@@ -37,24 +37,43 @@ Mise à Jour Automatique : Actualisation des données sur le site web en fonctio
 La politique des Quartiers Prioritaires de la Ville (QPV) vise à concentrer les efforts et les ressources sur des zones identifiées comme étant en difficulté sociale, économique et urbaine. À Paris, plusieurs quartiers bénéficient de cette politique. Ces quartiers, répartis dans divers arrondissements, ont été sélectionnés pour recevoir des aides spécifiques visant à améliorer les conditions de vie des habitants. Voici une liste des quartiers de Paris inclus dans la politique QPV :
 
 Grand Belleville (10ème - 11ème - 20ème arrondissements)
+
 Porte De La Chapelle - Charles Hermite (18ème et 19ème arrondissements)
+
 Porte Montmartre - Porte Des Poissonniers - Moskova (18ème arrondissement)
+
 Didot - Porte de Vanves (14ème arrondissement)
+
 Compans - Pelleport (20ème et 19ème arrondissements)
+
 Goutte D'Or (18ème arrondissement)
+
 La Chapelle - Evangile (18ème arrondissement)
+
 Villa d'Este (13ème arrondissement)
+
 Chaufourniers (19ème arrondissement)
+
 Jeanne D'Arc - Clisson (13ème arrondissement)
+
 Danube - Solidarité - Marseillaise (19ème arrondissement)
+
 Blémont (18ème arrondissement)
+
 Bédier - Boutroux (13ème arrondissement)
+
 Algérie (19ème arrondissement)
+
 Oudinè - Chevaleret (13ème arrondissement)
+
 Stalingrad Riquet (19ème arrondissement)
+
 Porte De Saint-Ouen - Porte Pouchet (17ème arrondissement)
+
 Kellermann - Paul Bourget (13ème arrondissement)
+
 Michelet - Alphonse Karr - Rue de Nantes (19ème et 18ème arrondissements)
+
 Ces quartiers sont au cœur des initiatives visant à réduire les inégalités, améliorer le cadre de vie et favoriser l'insertion sociale et professionnelle des résidents. La mise en œuvre de cette politique permet de mobiliser des ressources significatives pour répondre aux défis spécifiques de ces zones urbaines.
 
 
