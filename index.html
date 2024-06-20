@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Entreprises</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="IMG-20240613-WA0000.jpg" alt="Logo Quartiers d'Affaires" class="header-logo">
+            <h1>Dashboard Entreprises</h1>
+        </div>
+    </header>
+    <div class="sidebar">
+        <h2>Thématiques</h2>
+        <ul>
+            <li><a href="#">Statistiques financières</a></li>
+            <li><a href="#">Statistiques géographiques</a></li>
+            <li><a href="#">Annuaire</a></li>
+        </ul>
+    </div>
+    <main>
+        <div id="filters">
+            <label for="departement">Département:</label>
+            <select id="departement">
+                <option value="paris">Paris</option>
+                <option value="seine-saint-denis">Seine-Saint-Denis</option>
+                <option value="essonne">Essonne</option>
+            </select>
+            <label for="secteur">Secteur d'activité:</label>
+            <select id="secteur">
+                <option value="architecture">Architecture</option>
+                <option value="informatique">Informatique</option>
+                <option value="commerce">Commerce</option>
+            </select>
+        </div>
+        <div id="charts">
+            <div class="chart" id="chart1">
+                <h2>Nombre d'entreprises par sexe</h2>
+                <canvas id="sexChart"></canvas>
+            </div>
+            <div class="chart" id="chart2">
+                <h2>Nombre d'entreprises par capital social</h2>
+                <canvas id="capitalChart"></canvas>
+            </div>
+            <div class="chart" id="chart3">
+                <h2>Forme juridique des entreprises</h2>
+                <canvas id="formChart"></canvas>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>© 2024 Dashboard Entreprises</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+
