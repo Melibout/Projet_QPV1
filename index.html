@@ -79,6 +79,8 @@
             background: white;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
         }
         .section {
             display: none;
@@ -123,21 +125,49 @@
             bottom: 0;
             left: 0;
             right: 0;
-            border-top: 2px solid #ff4500;
+            border-top: 2px solid #7fc7e4;
         }
         #mapid {
-            height: 500px;
+            height: 300px;
             border: 1px solid #bdc3c7;
             border-radius: 10px;
+            margin-bottom: 20px;
         }
         #filters {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 20px;
+            align-items: center;
         }
-        #filters label, #filters select, #filters input, #filters button {
+        #filters label {
             font-size: 1em;
+            font-weight: bold;
+        }
+        #filters input, #filters select, #filters button {
+            font-size: 1em;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background 0.3s, transform 0.3s;
+        }
+        #filters button {
+            background: #4b0082;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #filters button:hover {
+            background: #1abc9c;
+        }
+        .info-box {
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            width: 200px;
         }
     </style>
 </head>
@@ -158,130 +188,142 @@
         </ul>
     </div>
     <main>
-        <section id="financial" class="section">
-            <h2>Statistiques financières</h2>
-            <div id="charts">
-                <div class="chart" id="chart1">
-                    <h2>Nombre d'entreprises par sexe</h2>
-                    <canvas id="sexChart"></canvas>
+        <div style="flex: 1;">
+            <section id="financial" class="section">
+                <h2>Statistiques financières</h2>
+                <div id="charts">
+                    <div class="chart" id="chart1">
+                        <h2>Nombre d'entreprises par sexe</h2>
+                        <canvas id="sexChart"></canvas>
+                    </div>
+                    <div class="chart" id="chart2">
+                        <h2>Nombre d'entreprises par capital social</h2>
+                        <canvas id="capitalChart"></canvas>
+                    </div>
+                    <div class="chart" id="chart3">
+                        <h2>Forme juridique des entreprises</h2>
+                        <canvas id="formChart"></canvas>
+                    </div>
                 </div>
-                <div class="chart" id="chart2">
-                    <h2>Nombre d'entreprises par capital social</h2>
-                    <canvas id="capitalChart"></canvas>
+            </section>
+            <section id="geographical" class="section active">
+                <h2>Statistiques géographiques</h2>
+                <div id="filters">
+                    <label for="search">Recherche d'adresse:</label>
+                    <input type="text" id="search" placeholder="Entrez une adresse">
+                    <button id="searchBtn">Rechercher</button>
+                    <label for="companySearch">Recherche par nom d'entreprise:</label>
+                    <input type="text" id="companySearch" placeholder="Entrez le nom de l'entreprise">
+                    <button id="companySearchBtn">Rechercher</button>
+                    <label for="departement">Département:</label>
+                    <select id="departement">
+                        <option value="paris">Paris</option>
+                        <option value="seine-et-marne">Seine-et-Marne</option>
+                        <option value="yvelines">Yvelines</option>
+                        <option value="essonne">Essonne</option>
+                        <option value="hauts-de-seine">Hauts-de-Seine</option>
+                        <option value="seine-saint-denis">Seine-Saint-Denis</option>
+                        <option value="val-de-marne">Val-de-Marne</option>
+                        <option value="val-d-oise">Val-d'Oise</option>
+                    </select>
+                    <label for="secteur">Secteur d'activité:</label>
+                    <select id="secteur">
+                        <option value="architecture">Architecture</option>
+                        <option value="informatique">Informatique</option>
+                        <option value="commerce">Commerce</option>
+                    </select>
                 </div>
-                <div class="chart" id="chart3">
-                    <h2>Forme juridique des entreprises</h2>
-                    <canvas id="formChart"></canvas>
+                <div id="map">
+                    <h2>Carte Interactive des QPV en Île-de-France</h2>
+                    <div id="mapid"></div>
                 </div>
+            </section>
+            <section id="directory" class="section">
+                <h2>Annuaire</h2>
+                <p>Contenu de l'annuaire</p>
+            </section>
+            <section id="qpv" class="section">
+                <h2>Listing des Quartiers QPV</h2>
+                <div class="departments">
+                    <div class="department-card" onclick="toggleDistricts('paris')">
+                        Paris
+                        <ul id="paris" class="districts">
+                            <li>#Grand Belleville 10ème - 11ème - 20ème</li>
+                            <li>#Porte De La Chapelle - Charles Hermite (18ème et 19ème arrondissements)</li>
+                            <li>#Porte Montmartre - Porte Des Poissonniers - Moskova (18ème arrondissement)</li>
+                            <li>#Didot - Porte de Vanves (14ème arrondissement)</li>
+                            <li>#Compans - Pelleport (20ème et 19ème arrondissements)</li>
+                            <li>#Goutte D'Or (18ème arrondissement)</li>
+                            <li>#La Chapelle - Evangile (18ème arrondissement)</li>
+                            <li>#Villa d'Este (13ème arrondissement)</li>
+                            <li>#Chaufourniers (19ème arrondissement)</li>
+                            <li>#Jeanne D'Arc - Clisson (13ème arrondissement)</li>
+                            <li>#Danube - Solidarité - Marseillaise (19ème arrondissement)</li>
+                            <li>#Blémont (18ème arrondissement)</li>
+                            <li>#Bédier - Boutroux (13ème arrondissement)</li>
+                            <li>#Algérie (19ème arrondissement)</li>
+                            <li>#Oudinè - Chevaleret (13ème arrondissement)</li>
+                            <li>#Stalingrad Riquet (19ème arrondissement)</li>
+                            <li>#Porte De Saint-Ouen - Porte Pouchet (17ème arrondissement)</li>
+                            <li>#Kellermann - Paul Bourget (13ème arrondissement)</li>
+                            <li>#Michelet - Alphonse Karr - Rue de Nantes (19ème et 18ème arrondissements)</li>
+                        </ul>
+                    </div>
+                    <div class="department-card" onclick="toggleDistricts('seine-et-marne')">
+                        Seine-et-Marne
+                        <ul id="seine-et-marne" class="districts">
+                            <!-- Add quartiers QPV for Seine-et-Marne here -->
+                        </ul>
+                    </div>
+                    <div class="department-card" onclick="toggleDistricts('yvelines')">
+                        Yvelines
+                        <ul id="yvelines" class="districts">
+                            <!-- Add quartiers QPV for Yvelines here -->
+                        </ul>
+                    </div>
+                    <div class="department-card" onclick="toggleDistricts('essonne')">
+                        Essonne
+                        <ul id="essonne" class="districts">
+                            <!-- Add quartiers QPV for Essonne here -->
+                        </ul>
+                    </div>
+                    <div class="department-card" onclick="toggleDistricts('hauts-de-seine')">
+                        Hauts-de-Seine
+                        <ul id="hauts-de-seine" class="districts">
+                            <!-- Add quartiers QPV for Hauts-de-Seine ici -->
+                        </ul>
+                    </div>
+                    <div class="department-card" onclick="toggleDistricts('seine-saint-denis')">
+                        Seine-Saint-Denis
+                        <ul id="seine-saint-denis" class="districts">
+                            <!-- Add quartiers QPV for Seine-Saint-Denis ici -->
+                        </ul>
+                    </div>
+                    <div class="department-card" onclick="toggleDistricts('val-de-marne')">
+                        Val-de-Marne
+                        <ul id="val-de-marne" class="districts">
+                            <!-- Add quartiers QPV for Val-de-Marne ici -->
+                        </ul>
+                    </div>
+                    <div class="department-card" onclick="toggleDistricts('val-d-oise')">
+                        Val-d'Oise
+                        <ul id="val-d-oise" class="districts">
+                            <!-- Add quartiers QPV for Val-d'Oise ici -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div style="width: 250px; padding-left: 20px;">
+            <div class="info-box" id="qpv-info">
+                <h4>politique QPV</h4>
+                <input type="checkbox" id="qpv-checkbox"> NON_QPV
             </div>
-        </section>
-        <section id="geographical" class="section active">
-            <h2>Statistiques géographiques</h2>
-            <div id="filters">
-                <label for="search">Recherche d'adresse:</label>
-                <input type="text" id="search" placeholder="Entrez une adresse">
-                <button id="searchBtn">Rechercher</button>
-                <label for="companySearch">Recherche par nom d'entreprise:</label>
-                <input type="text" id="companySearch" placeholder="Entrez le nom de l'entreprise">
-                <button id="companySearchBtn">Rechercher</button>
-                <label for="departement">Département:</label>
-                <select id="departement">
-                    <option value="paris">Paris</option>
-                    <option value="seine-et-marne">Seine-et-Marne</option>
-                    <option value="yvelines">Yvelines</option>
-                    <option value="essonne">Essonne</option>
-                    <option value="hauts-de-seine">Hauts-de-Seine</option>
-                    <option value="seine-saint-denis">Seine-Saint-Denis</option>
-                    <option value="val-de-marne">Val-de-Marne</option>
-                    <option value="val-d-oise">Val-d'Oise</option>
-                </select>
-                <label for="secteur">Secteur d'activité:</label>
-                <select id="secteur">
-                    <option value="architecture">Architecture</option>
-                    <option value="informatique">Informatique</option>
-                    <option value="commerce">Commerce</option>
-                </select>
+            <div class="info-box" id="department-info">
+                <h4>departement</h4>
+                <input type="checkbox" id="department-checkbox"> <span id="department-name">N/A</span>
             </div>
-            <div id="map">
-                <h2>Carte Interactive des QPV en Île-de-France</h2>
-                <div id="mapid"></div>
-            </div>
-        </section>
-        <section id="directory" class="section">
-            <h2>Annuaire</h2>
-            <p>Contenu de l'annuaire</p>
-        </section>
-        <section id="qpv" class="section">
-            <h2>Listing des Quartiers QPV</h2>
-            <div class="departments">
-                <div class="department-card" onclick="toggleDistricts('paris')">
-                    Paris
-                    <ul id="paris" class="districts">
-                        <li>#Grand Belleville 10ème - 11ème - 20ème</li>
-                        <li>#Porte De La Chapelle - Charles Hermite (18ème et 19ème arrondissements)</li>
-                        <li>#Porte Montmartre - Porte Des Poissonniers - Moskova (18ème arrondissement)</li>
-                        <li>#Didot - Porte de Vanves (14ème arrondissement)</li>
-                        <li>#Compans - Pelleport (20ème et 19ème arrondissements)</li>
-                        <li>#Goutte D'Or (18ème arrondissement)</li>
-                        <li>#La Chapelle - Evangile (18ème arrondissement)</li>
-                        <li>#Villa d'Este (13ème arrondissement)</li>
-                        <li>#Chaufourniers (19ème arrondissement)</li>
-                        <li>#Jeanne D'Arc - Clisson (13ème arrondissement)</li>
-                        <li>#Danube - Solidarité - Marseillaise (19ème arrondissement)</li>
-                        <li>#Blémont (18ème arrondissement)</li>
-                        <li>#Bédier - Boutroux (13ème arrondissement)</li>
-                        <li>#Algérie (19ème arrondissement)</li>
-                        <li>#Oudinè - Chevaleret (13ème arrondissement)</li>
-                        <li>#Stalingrad Riquet (19ème arrondissement)</li>
-                        <li>#Porte De Saint-Ouen - Porte Pouchet (17ème arrondissement)</li>
-                        <li>#Kellermann - Paul Bourget (13ème arrondissement)</li>
-                        <li>#Michelet - Alphonse Karr - Rue de Nantes (19ème et 18ème arrondissements)</li>
-                    </ul>
-                </div>
-                <div class="department-card" onclick="toggleDistricts('seine-et-marne')">
-                    Seine-et-Marne
-                    <ul id="seine-et-marne" class="districts">
-                        <!-- Add quartiers QPV for Seine-et-Marne here -->
-                    </ul>
-                </div>
-                <div class="department-card" onclick="toggleDistricts('yvelines')">
-                    Yvelines
-                    <ul id="yvelines" class="districts">
-                        <!-- Add quartiers QPV for Yvelines here -->
-                    </ul>
-                </div>
-                <div class="department-card" onclick="toggleDistricts('essonne')">
-                    Essonne
-                    <ul id="essonne" class="districts">
-                        <!-- Add quartiers QPV for Essonne here -->
-                    </ul>
-                </div>
-                <div class="department-card" onclick="toggleDistricts('hauts-de-seine')">
-                    Hauts-de-Seine
-                    <ul id="hauts-de-seine" class="districts">
-                        <!-- Add quartiers QPV for Hauts-de-Seine here -->
-                    </ul>
-                </div>
-                <div class="department-card" onclick="toggleDistricts('seine-saint-denis')">
-                    Seine-Saint-Denis
-                    <ul id="seine-saint-denis" class="districts">
-                        <!-- Add quartiers QPV for Seine-Saint-Denis ici -->
-                    </ul>
-                </div>
-                <div class="department-card" onclick="toggleDistricts('val-de-marne')">
-                    Val-de-Marne
-                    <ul id="val-de-marne" class="districts">
-                        <!-- Add quartiers QPV for Val-de-Marne ici -->
-                    </ul>
-                </div>
-                <div class="department-card" onclick="toggleDistricts('val-d-oise')">
-                    Val-d'Oise
-                    <ul id="val-d-oise" class="districts">
-                        <!-- Add quartiers QPV for Val-d'Oise ici -->
-                    </ul>
-                </div>
-            </div>
-        </section>
+        </div>
     </main>
     <footer>
         <p>© 2024 Dashboard Entreprises</p>
@@ -355,6 +397,9 @@
                                 .openPopup();
 
                             updateDepartment(data[0].display_name);
+                            // Simuler l'appel pour obtenir le secteur d'activité
+                            const secteurActivite = getCompanySector(companyName);
+                            updateSecteurActivite(secteurActivite);
                         } else {
                             alert('Entreprise non trouvée.');
                         }
@@ -363,6 +408,17 @@
                 alert('Veuillez entrer un nom d\'entreprise.');
             }
         });
+
+        function getCompanySector(companyName) {
+            // Simulate fetching sector from company name
+            const companySectors = {
+                "capgemini": "Informatique",
+                "example": "Commerce",
+                "anotherexample": "Architecture"
+                // Ajouter d'autres entreprises et leurs secteurs ici
+            };
+            return companySectors[companyName.toLowerCase()] || "Inconnu";
+        }
 
         function updateDepartment(displayName) {
             var departmentNames = {
@@ -379,6 +435,17 @@
             for (var name in departmentNames) {
                 if (displayName.includes(name)) {
                     document.getElementById('departement').value = departmentNames[name];
+                    document.getElementById('department-name').innerText = name;
+                    break;
+                }
+            }
+        }
+
+        function updateSecteurActivite(secteur) {
+            var secteurOptions = document.getElementById('secteur').options;
+            for (var i = 0; i < secteurOptions.length; i++) {
+                if (secteurOptions[i].text.toLowerCase() === secteur.toLowerCase()) {
+                    document.getElementById('secteur').value = secteurOptions[i].value;
                     break;
                 }
             }
